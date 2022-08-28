@@ -30,10 +30,6 @@ Then start the server with
 
 ### For React server
 
-```bash
-  cd client
-```
-
 Install the node requirements
 
 ```bash
