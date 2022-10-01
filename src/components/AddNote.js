@@ -12,6 +12,7 @@ import {
   FormControlLabel,
   Radio,
   Paper,
+  CircularProgress,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState } from "react";
@@ -23,11 +24,12 @@ export default function AddNote(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("todos");
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       await axios.post(
         "/api/notes/note/",
@@ -45,8 +47,13 @@ export default function AddNote(props) {
         }
       );
       await setmodalOpen(false);
+      setTitle("");
+      setContent("");
       get_notes();
-    } catch (e) {}
+    } catch (e) {
+      if (e.response.status == 403) setAuth({});
+    }
+    setLoading(false);
   };
 
   return (
@@ -133,7 +140,7 @@ export default function AddNote(props) {
                 variant="contained"
                 endIcon={<ArrowForwardIosIcon />}
               >
-                Submit
+                {loading ? <CircularProgress size={24} /> : "Submit"}
               </Button>
             </form>
           </Container>
