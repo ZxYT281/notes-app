@@ -21,6 +21,7 @@ export default function SignIn() {
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
+  const [passwordShown, setPassShown] = React.useState(false);
 
   const { setAuth } = useAuth();
   const handleSubmit = async (event) => {
@@ -78,7 +79,7 @@ export default function SignIn() {
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={!passwordShown ? "password" : "text"}
             id="password"
             autoComplete="current-password"
             onChange={(e) => setPass(e.target.value)}
@@ -86,8 +87,15 @@ export default function SignIn() {
             helperText={error ? "Email or password wrong" : ""}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            control={
+              <Checkbox
+                value="showpassword"
+                color="primary"
+                checked={passwordShown}
+              />
+            }
+            label="Show Password"
+            onChange={(e) => setPassShown(!passwordShown)}
           />
           <Button
             type="submit"

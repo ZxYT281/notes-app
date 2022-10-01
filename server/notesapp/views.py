@@ -31,7 +31,7 @@ class NoteView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         else:
-            return Response(serializer.data, status=403)
+            return Response(serializer.data, status=400)
 
     def delete(Self, request: HttpRequest, id: int):
         note = get_object_or_404(Note, id=id)
