@@ -77,21 +77,7 @@ export default function Home() {
             label="Search Notes"
             fullWidth
           />
-          {
-            // TODO: Make the filter button
-          }
-          {/* <Grid container spacing={2}>
-            <Grid item xs={10}>
-              <TextField
-                onChange={(e) => setSearch(e.target.value)}
-                label="Search Notes"
-                fullWidth
-              />
-            </Grid>
-            <Grid item>
-              <Button>Hello</Button>
-            </Grid>
-          </Grid> */}
+          
         </Box>
         {loading && (
           <Box display="flex" justifyContent="center" alignItems="center">
